@@ -23,7 +23,7 @@ brew install planitaicojp/tap/estat
 ### Scoop (Windows)
 
 ```powershell
-scoop bucket add planitaicojp https://github.com/planitaicojp/scoop-bucket
+scoop bucket add planitaicojp https://github.com/planitaicojp/bucket
 scoop install estat
 ```
 
