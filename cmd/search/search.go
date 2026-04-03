@@ -32,7 +32,7 @@ func init() {
 	Cmd.Flags().Int("limit", 0, "取得件数の上限")
 	Cmd.Flags().Int("start", 0, "取得開始位置")
 	Cmd.Flags().String("base-url", "", "APIベースURL（テスト用）")
-	Cmd.Flags().MarkHidden("base-url")
+	_ = Cmd.Flags().MarkHidden("base-url")
 }
 
 func runSearch(cmd *cobra.Command, args []string) error {
