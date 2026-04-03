@@ -20,7 +20,7 @@ var completionCmd = &cobra.Command{
   # fish
   estat completion fish > ~/.config/fish/completions/estat.fish`,
 	ValidArgs:             []string{"bash", "zsh", "fish", "powershell"},
-	Args:                  cobra.ExactValidArgs(1),
+	Args:                  cobra.MatchAll(cobra.ExactArgs(1), cobra.OnlyValidArgs),
 	DisableFlagsInUseLine: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		switch args[0] {

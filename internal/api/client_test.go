@@ -16,7 +16,9 @@ func TestClient_Get_success(t *testing.T) {
 			t.Errorf("lang = %q, want %q", r.URL.Query().Get("lang"), "J")
 		}
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
+		if err := json.NewEncoder(w).Encode(map[string]string{"status": "ok"}); err != nil {
+			t.Fatal(err)
+		}
 	}))
 	defer server.Close()
 
@@ -33,7 +35,7 @@ func TestClient_Get_success(t *testing.T) {
 func TestClient_Get_apiError(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("bad request"))
+		_, _ = w.Write([]byte("bad request"))
 	}))
 	defer server.Close()
 

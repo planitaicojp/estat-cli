@@ -61,7 +61,7 @@ func (c *Client) Get(path string, params map[string]string, result any) error {
 	if err != nil {
 		return &cerrors.NetworkError{Err: err}
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if c.Verbose {
 		fmt.Fprintf(os.Stderr, "HTTP %d\n", resp.StatusCode)
@@ -111,7 +111,7 @@ func (c *Client) Post(path string, params map[string]string, result any) error {
 	if err != nil {
 		return &cerrors.NetworkError{Err: err}
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if c.Verbose {
 		fmt.Fprintf(os.Stderr, "HTTP %d\n", resp.StatusCode)
