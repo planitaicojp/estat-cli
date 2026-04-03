@@ -1,0 +1,53 @@
+version: 2
+
+builds:
+  - binary: estat
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w -X github.com/planitaicojp/estat-cli/cmd.version={{.Version}}
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - format: tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+
+brews:
+  - repository:
+      owner: planitaicojp
+      name: homebrew-tap
+    name: estat
+    homepage: https://github.com/planitaicojp/estat-cli
+    description: "e-Stat（政府統計の総合窓口）API CLI ツール"
+    license: MIT
+    install: |
+      bin.install "estat"
+
+scoops:
+  - repository:
+      owner: planitaicojp
+      name: scoop-bucket
+    name: estat
+    homepage: https://github.com/planitaicojp/estat-cli
+    description: "e-Stat（政府統計の総合窓口）API CLI ツール"
+    license: MIT
+
+checksum:
+  name_template: "checksums.txt"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
